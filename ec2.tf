@@ -9,22 +9,22 @@ resource "aws_security group" "ec2_sg" {
   description = "Allow SSH and HTTP"
   vpc_id      = aws_vpc.main.id
 
-tags = {
+  tags = {
     Name = "my-ec2-sg"
   }
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
     cidr_ipv4 = "71.69.235.10/32"
-    }
+  }
 }
 
 resource "aws_vpc_security_group_egress_rule" "all" {
-    security_group_id = aws_security_group.ec2_sg.id
-    cidr_ipv4       = "0.0.0.0/0"
-    ip_protocol       = "-1"
+  security_group_id = aws_security_group.ec2_sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
 }
 
 data "aws_ssm_parameter" "al2023" {
